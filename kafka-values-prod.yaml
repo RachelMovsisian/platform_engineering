@@ -1,0 +1,29 @@
+replicaCount: 1
+
+auth:
+  enabled: false
+
+kraft:
+  enabled: false
+
+zookeeper:
+  enabled: true
+  persistence:
+    enabled: false
+
+persistence:
+  enabled: false
+
+logPersistence:
+  enabled: false
+
+listeners:
+  client:
+    protocol: PLAINTEXT
+
+externalAccess:
+  enabled: false
+
+configurationOverrides:
+  advertised.listeners: PLAINTEXT://my-release-kafka.prod.svc.cluster.local:9092
+  listeners: PLAINTEXT://:9092

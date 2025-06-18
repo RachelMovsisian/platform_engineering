@@ -14,6 +14,9 @@ kubectl get namespace "$NAMESPACE" >/dev/null 2>&1 || kubectl create namespace "
 echo "Installing Kafka chart in namespace '$NAMESPACE'..."
 helm install my-release bitnami/kafka -f kafka-values-"$NAMESPACE".yaml --namespace "$NAMESPACE"
 
+echo "Waiting for Kafka pods to be ready..."
+kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=kafka -n "$NAMESPACE" --timeout=300s
+
 echo "Creating ArgoCD application in namespace '$NAMESPACE'..."
 argocd app create my-app \
   --repo https://github.com/RachelMovsisian/platform_engineering.git \

@@ -18,7 +18,7 @@ echo "Waiting for Kafka pods to be ready..."
 kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=kafka -n "$NAMESPACE" --timeout=300s
 
 echo "Creating ArgoCD application in namespace '$NAMESPACE'..."
-argocd app create my-app \
+argocd app create my-app-$NAMESPACE \
   --repo https://github.com/RachelMovsisian/platform_engineering.git \
   --path . \
   --dest-server https://kubernetes.default.svc \

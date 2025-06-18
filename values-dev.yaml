@@ -1,0 +1,23 @@
+flask:
+  image: justme2024/flask-kafka-dev:latest
+  port: 5000
+  servicePort: 80
+
+api:
+  image: justme2024/api-server-dev:latest
+  port: 8000
+
+consumer:
+  image: justme2024/kafka-to-mongo-consumer-dev:latest
+  env:
+    MONGODB_URL: "mongodb://mongo.dev.svc.cluster.local:27017/"
+    KAFKA_BOOTSTRAP_SERVERS: "my-release-kafka-controller-headless.dev.svc.cluster.local:9092"
+
+mongo:
+  image: mongo:6
+  port: 27017
+
+kafka:
+  bootstrap: my-release-kafka.dev.svc.cluster.local:9092
+  controller: my-release-kafka-controller-headless.dev.svc.cluster.local:9092
+

@@ -23,7 +23,7 @@ argocd app create my-app \
   --path . \
   --dest-server https://kubernetes.default.svc \
   --dest-namespace "$NAMESPACE" \
-  --sync-policy automated
+  --sync-policy automated \
   --helm-values-file values-${NAMESPACE}.yaml
 
 echo "Deployment to namespace '$NAMESPACE' completed."
